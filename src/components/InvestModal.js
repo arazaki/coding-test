@@ -74,7 +74,7 @@ const InvestModal = () => {
                             value={investmentAmount} onChange={(e) => onInvestmentChange(selectedLoan && selectedLoan.available, e.target.value)} />
                     </div>
                     <div className="col-md-auto col-12">
-                        <button className="bg-warning text-uppercase border-0 px-5 py-3 col">Invest</button>
+                        <button className="bg-warning text-uppercase border-0 px-5 py-3 col" data-test="invest-modal-button">Invest</button>
                     </div>
                 </div>
             </form>

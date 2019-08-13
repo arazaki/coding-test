@@ -5,7 +5,7 @@ import { termRemaining } from '../helpers/index';
 const CurrentLoansListItem = (props) => {
     const { handleSelectLoan, investedLoans } = useLoansContext()
     return (
-        <div>
+        <div data-test="component-current-loans-list-item">
             <h4 className="font-weight-bold">{props.loan.title}</h4>
             <div className="row">
                 <div className="col-md col-12 my-md-0 my-1">
@@ -38,7 +38,7 @@ const CurrentLoansListItem = (props) => {
                 </div>
                 <div className="align-self-end col-md-auto col-12">
                     {investedLoans.filter((item) => item.id === props.loan.id).length > 0 && <p className="text-success">Invested</p>}
-                    <button className="bg-warning text-uppercase border-0 px-5 py-3 col" onClick={() => handleSelectLoan(props.loan)}>Invest</button>
+                    <button className="bg-warning text-uppercase border-0 px-5 py-3 col" data-test="invest-button" onClick={() => handleSelectLoan(props.loan)}>Invest</button>
                 </div>
             </div>
         </div>

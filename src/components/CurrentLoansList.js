@@ -10,13 +10,13 @@ const CurrentLoansList = () => {
 
     if (loans.length === 0) {
         contents = (
-            <span>
+            <span data-test="no-loans-message">
                 Sorry. We are out of loans!
             </span>
         )
     } else {
         const loansItems = loans.map((item) => (
-            <div className="list-group-item mb-md-4 mb-2" key={item.id}>
+            <div className="list-group-item mb-md-4 mb-2" data-test="current-loans-list-item" key={item.id}>
                 <CurrentLoansListItem loan={item} />
             </div>
         ));
@@ -33,7 +33,7 @@ const CurrentLoansList = () => {
         );
     }
     return (
-        <div className="current-loans-list px-md-5 py-4 bg-light">
+        <div className="current-loans-list px-md-5 py-4 bg-light" data-test="component-current-loans-list">
             {contents}
         </div>
     )
