@@ -1,17 +1,57 @@
 import React, { useState } from 'react';
 import LoansContext from './context/loans-context';
 import CurrentLoansList from './components/CurrentLoansList';
+import InvestModal from './components/InvestModal';
+import Modal from 'react-modal';
+import { decreaseAvailable, formatCurrency } from './helpers/index';
 
 const App = (props) => {
   const [loans, setLoans] = useState(props.loans);
+  const [selectedLoan, setSelectedLoan] = useState(undefined);
+  const [investedLoans, setInvestedLoans] = useState([]);
+
+  const onInvest = (item, investmentAmount) => {
+    setLoans(loans.map((loan) => {
+      if (loan.id === item.id) {
+        return {
+          ...loan,
+          "available": formatCurrency(decreaseAvailable(item.available, investmentAmount))
+        }
+      }
+      return loan
+    }))
+    handleInvestedLoans(item);
+  }
+
+  const handleSelectLoan = (loan) => {
+    Modal.setAppElement('#root');
+    setSelectedLoan(loan);
+  }
+
+  const handleClearSelectedLoan = () => {
+    setSelectedLoan(undefined)
+  }
+
+  const handleInvestedLoans = (loan) => {
+    setInvestedLoans([
+      ...investedLoans,
+      loan
+    ])
+  }
 
   return (
     <div className="container">
       <LoansContext.Provider value={
         {
-          loans
+          loans,
+          selectedLoan,
+          investedLoans,
+          onInvest,
+          handleSelectLoan,
+          handleClearSelectedLoan
         }}>
         <CurrentLoansList />
+        <InvestModal />
       </LoansContext.Provider>
     </div>
   );
