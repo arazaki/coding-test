@@ -40,7 +40,7 @@ const App = (props) => {
   }
 
   return (
-    <div className="container">
+    <div className="container p-0">
       <LoansContext.Provider value={
         {
           loans,
